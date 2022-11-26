@@ -29,7 +29,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .container{
   width: 100vw;
   height: 100vh;
@@ -42,15 +42,16 @@ export default {
   background-color: #eee;
   border-radius: 10px;
   min-height: 500px;
-}
-.displayWrapper{
-
-}
-.firstPage{
+  .firstPage{
   display: inline-block;
   width: 100%;
   height: 100%;
 }
+}
+.displayWrapper{
+
+}
+
 .secondPage{
   display: inline-block;
   width: 100%;
