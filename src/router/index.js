@@ -43,6 +43,15 @@ const routes = [
             title: '单个form-item的多Prop校验'
           }
         },
+        {
+          path:'form_item_label_1',
+          name: 'form_item_label_1',
+          component: ()=>import('../views/form/form_item_label_1.vue'),
+          meta:{
+            desc: ' 表单label垂直居中',
+            title: '表单label垂直居中'
+          }
+        },
       ]
     },
 ]
