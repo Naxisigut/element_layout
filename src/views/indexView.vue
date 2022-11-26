@@ -1,29 +1,61 @@
 <template>
     <div class="container">
       <div class="display">
-        <div class="firstPage left" ref="firstPage">
-          <button @click="go">2</button>
+        <div class="displayWrapper">
+        <div class="page front" ref="firstPage">
+          <el-row :gutter="100">
+            <el-col span="8" v-for="item in indexCata" :key="item.name">
+              <div class="item" @click="inner(item.name)">{{ item.name }}</div>
+            </el-col>
+            <el-col span="8" v-for="item in indexCata" :key="item.name">
+              <div class="item" @click="inner(item.name)">{{ item.name }}</div>
+            </el-col>
+            <el-col span="8" v-for="item in indexCata" :key="item.name">
+              <div class="item" @click="inner(item.name)">{{ item.name }}</div>
+            </el-col>
+          </el-row>
         </div>
-        <!-- <div v-for="item, index in indexCata" :key="index" class="btn" >{{item.name}}</div> -->
 
-
-        <div class="secondPage right" ref="secondPage">2</div>
+        <div class="page hide" ref="secondPage">
+          <el-button @click="back" size="small" icon="el-icon-back"></el-button>
+          <el-row :gutter="100">
+            <el-col span="8" v-for="item in innerCata" :key="item.name">
+              <div class="item" @click="go(item.name)">{{ item.meta.title }}</div>
+            </el-col>
+          </el-row>
+        </div>
+        </div>
       </div>
     </div>
 </template>
 
 <script>
-import { indexCata } from "@/router";
+import { getIndexCata, getInnerCata } from "@/router";
 export default {
   name: 'indexView',
   data() {
     return {
-      indexCata
+      indexCata: getIndexCata(),
+      innerCata: []
     }
   },
   methods:{
-    go(){
-
+    inner(outerName){
+      this.$refs.secondPage.classList.remove('hide')
+      this.$refs.secondPage.classList.add('front')
+      this.$refs.firstPage.classList.remove('front')
+      this.$refs.firstPage.classList.add('hide')
+      this.innerCata = getInnerCata(outerName)
+    },
+    back(){
+      this.$refs.firstPage.classList.remove('hide')
+      this.$refs.firstPage.classList.add('front')
+      this.$refs.secondPage.classList.remove('front')
+      this.$refs.secondPage.classList.add('hide')
+      this.innerCata = []
+    },
+    go(name){
+      this.$router.push({name})
     }
   }
 }
@@ -38,25 +70,37 @@ export default {
 .display {
   margin: auto;
   padding: 50px;
-  width: 700px;
+  width: 50%;
+  height: 800px;
   background-color: #eee;
   border-radius: 10px;
-  min-height: 500px;
-  .firstPage{
-  display: inline-block;
-  width: 100%;
-  height: 100%;
+  .displayWrapper{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .page{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transition: all .5s ease;
+      .item{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        cursor: pointer;
+        &:hover{
+          color: peru;
+        }
+      }
+    }
+  }
 }
-}
-.displayWrapper{
 
+.hide{
+  opacity: 0%;
 }
-
-.secondPage{
-  display: inline-block;
-  width: 100%;
-}
-.btn:hover {
-  color: peru;
+.front{
+  z-index: 999;
 }
 </style>

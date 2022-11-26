@@ -42,12 +42,14 @@ const router = new VueRouter({
   routes
 })
 
-// indexCata为将要在indexView上展示的菜单
-const getIndexCata = ()=>{
+// indexCata: 在indexView page1上展示的菜单
+export const getIndexCata = ()=>{
   const filterList = ['/', '/index']
   return routes.filter((item) => !filterList.includes(item.path))
 }
-
-export const indexCata = getIndexCata()
+// innerCata: 在indexView page2展示的菜单
+export const getInnerCata = (outCataName)=>{
+  return routes.find((item)=>item.name == outCataName).children
+}
 
 export default router
