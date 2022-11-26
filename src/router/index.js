@@ -2,8 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 Vue.use(VueRouter)
 
-const router = new VueRouter({
-  routes:[
+const routes = [
     {
       path: '/',
       redirect: '/index'
@@ -13,9 +12,10 @@ const router = new VueRouter({
       component: ()=>import('../views/indexView.vue')
     },
     {
-      path: '/display',
+      path: '/form',
+      name: 'Form',
       component: ()=>import('../views/layoutView.vue'),
-      children:[
+      children: [
         {
           path:'formItem_1',
           name: 'formItem_1',
@@ -36,7 +36,18 @@ const router = new VueRouter({
         },
       ]
     },
-  ]
+]
+
+const router = new VueRouter({
+  routes
 })
+
+// indexCata为将要在indexView上展示的菜单
+const getIndexCata = ()=>{
+  const filterList = ['/', '/index']
+  return routes.filter((item) => !filterList.includes(item.path))
+}
+
+export const indexCata = getIndexCata()
 
 export default router

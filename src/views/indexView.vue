@@ -1,29 +1,59 @@
 <template>
     <div class="container">
-      <div v-for="item, index in routes" :key="index" @click="$router.push(item.path)" class="btn" >{{item.meta.title}}</div>
+      <div class="display">
+        <div class="firstPage left" ref="firstPage">
+          <button @click="go">2</button>
+        </div>
+        <!-- <div v-for="item, index in indexCata" :key="index" class="btn" >{{item.name}}</div> -->
+
+
+        <div class="secondPage right" ref="secondPage">2</div>
+      </div>
     </div>
 </template>
 
 <script>
+import { indexCata } from "@/router";
 export default {
   name: 'indexView',
   data() {
     return {
-      routes:this.$router.getRoutes().filter((item)=>item.parent?.path === '/display')
+      indexCata
     }
   },
+  methods:{
+    go(){
+
+    }
+  }
 }
 </script>
 
-<style scoped >
-.container {
-  box-sizing: border-box;
-  margin: 100px auto;
+<style scoped>
+.container{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+.display {
+  margin: auto;
   padding: 50px;
-  width: 70%;
+  width: 700px;
   background-color: #eee;
   border-radius: 10px;
   min-height: 500px;
+}
+.displayWrapper{
+
+}
+.firstPage{
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+.secondPage{
+  display: inline-block;
+  width: 100%;
 }
 .btn:hover {
   color: peru;
