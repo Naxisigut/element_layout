@@ -17,12 +17,21 @@ const routes = [
       component: ()=>import('../views/layoutView.vue'),
       children: [
         {
+          path:'intro',
+          name: 'form_intro',
+          component: ()=>import('../views/form/form_intro.vue'),
+          meta:{
+            desc: '基本介绍',
+            title: '基本介绍'
+          }
+        },
+        {
           path:'formItem_1',
           name: 'formItem_1',
           component: ()=>import('../views/form/formItem-1.vue'),
           meta:{
             desc: 'element-ui表单组件布局',
-            title: '单行多表单项1'
+            title: '单行多表单项布局'
           }
         },
         {

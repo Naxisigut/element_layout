@@ -7,12 +7,6 @@
             <el-col span="8" v-for="item in indexCata" :key="item.name">
               <div class="item" @click="inner(item.name)">{{ item.name }}</div>
             </el-col>
-            <el-col span="8" v-for="item in indexCata" :key="item.name">
-              <div class="item" @click="inner(item.name)">{{ item.name }}</div>
-            </el-col>
-            <el-col span="8" v-for="item in indexCata" :key="item.name">
-              <div class="item" @click="inner(item.name)">{{ item.name }}</div>
-            </el-col>
           </el-row>
         </div>
 

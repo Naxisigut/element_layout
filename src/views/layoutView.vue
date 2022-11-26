@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="btn" ><button @click="$router.back()" >back</button></div>
+    <div class="btn" ><button @click="$router.back()" >back to index</button></div>
     <router-view></router-view>
   </div>
 </template>
