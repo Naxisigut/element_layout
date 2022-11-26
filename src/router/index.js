@@ -39,8 +39,8 @@ const routes = [
           name: 'custom_validate_1',
           component: ()=>import('../views/form/custom_validate_1.vue'),
           meta:{
-            desc: '单表单项校验多个Prop',
-            title: '单表单项校验多个prop'
+            desc: '单个form-item的多Prop校验',
+            title: '单个form-item的多Prop校验'
           }
         },
       ]

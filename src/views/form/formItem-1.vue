@@ -20,7 +20,7 @@
       </el-form>
     </div>
     <div class="h100"></div>
-    <div class="container">
+    <div class="container desc">
       <h2>说明</h2>
       <div class="h10"></div>
       <ul>
