@@ -13,7 +13,7 @@
     <div class="container desc">
       <h2>说明</h2>
       <div class="h10"></div>
-      <ul>
+      <ul class="descList">
         <li>需要样式穿透, 把label的行高设置为内容的高度</li>
       </ul>
     </div>

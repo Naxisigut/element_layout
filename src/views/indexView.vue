@@ -4,7 +4,7 @@
         <div class="displayWrapper">
         <div class="page front" ref="firstPage">
           <el-row :gutter="100">
-            <el-col span="8" v-for="item in indexCata" :key="item.name">
+            <el-col :span="8" v-for="item in indexCata" :key="item.name">
               <div class="item" @click="inner(item.name)">{{ item.name }}</div>
             </el-col>
           </el-row>
@@ -13,8 +13,11 @@
         <div class="page hide" ref="secondPage">
           <el-button @click="back" size="small" icon="el-icon-back"></el-button>
           <el-row :gutter="100">
-            <el-col span="8" v-for="item in innerCata" :key="item.name">
-              <div class="item" @click="go(item.name)">{{ item.meta.title }}</div>
+            <el-col :span="8" v-for="item in innerCata" :key="item.name">
+              <div class="item" @click="go(item.name)">
+                <div style="color: red">{{ item.meta.desc }}</div>
+                <div>{{ item.meta.title }}</div>
+              </div>
             </el-col>
           </el-row>
         </div>
@@ -81,7 +84,8 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 50px;
+        flex-direction: column;
+        height: 70px;
         cursor: pointer;
         &:hover{
           color: peru;

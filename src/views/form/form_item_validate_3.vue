@@ -23,7 +23,7 @@
     <div class="container desc">
       <h2>说明</h2>
       <div class="h10"></div>
-      <ul>
+      <ul class="descList">
         <li>理论上一个form-item只对应一个prop, 所以若想要在一个form-item里绑定多个prop, 并进行校验, 需要使用自定义校验</li>
         <li>此时由于往往并没有对应的prop, 故可以给form-item绑定一个并不存在的prop, 真正需要校验的字段在自定义函数里通过其它方式去访问</li>
         <li>自定义校验函数的详细写法在注释中</li>
