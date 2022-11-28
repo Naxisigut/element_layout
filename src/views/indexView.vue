@@ -59,47 +59,5 @@ export default {
 </script>
 
 <style scoped lang="less">
-.container{
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-}
-.display {
-  margin: auto;
-  padding: 50px;
-  width: 50%;
-  height: 80%;
-  background-color: #eee;
-  border-radius: 10px;
-  .displayWrapper{
-    position: relative;
-    width: 100%;
-    height: 100%;
-    .page{
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      transition: all .5s ease;
-      .item{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        height: 70px;
-        text-align: center;
-        cursor: pointer;
-        &:hover{
-          color: peru;
-        }
-      }
-    }
-  }
-}
-
-.hide{
-  opacity: 0%;
-}
-.front{
-  z-index: 999;
-}
+@import '@/style/indexStyle.less';
 </style>

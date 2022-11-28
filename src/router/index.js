@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter)
 
 import formRoutes from "./formRoutes";
+import tableRoutes from "./tableRoutes";
 
 const routes = [
     {
@@ -13,7 +14,8 @@ const routes = [
       path: '/index',
       component: ()=>import('../views/indexView.vue')
     },
-    formRoutes
+    formRoutes,
+    tableRoutes
 ]
 
 const router = new VueRouter({
