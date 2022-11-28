@@ -1,6 +1,15 @@
 
-/* 表格嵌套相关路由表 */
-const tableLayoutRoutes = [
+/* 表格表头相关路由表 */
+const tableHeaderRoutes = [
+  {
+    path: 'table_header_1',
+    name: 'table_header_1',
+    component: ()=>import('@/views/table/table_header_1.vue'),
+    meta: {
+      desc: '配置&数据',
+      title: '多级表头'
+    }
+  }
 ];
 
 /* 表格功能相关路由表 */
@@ -8,7 +17,17 @@ const tableFuncRoutes = [
 ];
 
 /* 表格样式相关路由表 */
-const tableStyleRoutes = []
+const tableStyleRoutes = [
+    {
+    path: 'table_style_1',
+    name: 'table_style_1',
+    component: ()=>import('@/views/table/table_style_1.vue'),
+    meta: {
+      desc: '表格样式',
+      title: '表头和数据居中'
+    }
+  }
+]
 
 /* 最终form相关路由表 */
 const tableRoutes = {
@@ -25,7 +44,7 @@ const tableRoutes = {
         title: "基本介绍",
       },
     },
-    ...tableLayoutRoutes,
+    ...tableHeaderRoutes,
     ...tableFuncRoutes,
     ...tableStyleRoutes
   ],
