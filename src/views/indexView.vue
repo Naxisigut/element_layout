@@ -68,7 +68,7 @@ export default {
   margin: auto;
   padding: 50px;
   width: 50%;
-  height: 800px;
+  height: 80%;
   background-color: #eee;
   border-radius: 10px;
   .displayWrapper{
@@ -86,6 +86,7 @@ export default {
         align-items: center;
         flex-direction: column;
         height: 70px;
+        text-align: center;
         cursor: pointer;
         &:hover{
           color: peru;
