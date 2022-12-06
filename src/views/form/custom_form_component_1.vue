@@ -1,7 +1,7 @@
 <template>
   <div class="page-container">
     <div class="container">
-        <MyForm></MyForm>
+        <MyForm :fieldList="fieldList" :data="formData"></MyForm>
     </div>
     <!-- <div class="h100"></div>
     <div class="container desc">
@@ -23,6 +23,26 @@ export default {
   },
   data() {
     return {
+        formData:{
+            name: '',
+            gender: ''
+        },
+        fieldList:[
+            /* 普通输入框 */
+            {
+                type: 'input', // 表单项类型
+                show: true, // 是否显示；不传默认显示
+                event: 'click', 
+                value: 'name', // 表单项绑定的数据字段
+                width: 100, // 输入框的宽度
+                disabled: false, // 输入框是否禁用
+            },
+            {
+                type: 'input',
+                event: 'click',
+                value: 'gender'
+            }
+        ]
     }
   },
   methods: {

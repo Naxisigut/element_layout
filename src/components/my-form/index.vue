@@ -26,14 +26,14 @@
         :style="{ width: item.width + 'px' }" :type="item.type" :title="data[item.value]" :disabled="item.disabled"
         :clearable="item.clearable || true" :placeholder="item.disabled ? '' : getPlaceholder(item)"
         @focus="handleEvent(item.event)" @change="handleEventChange(item.event, data[item.value])" />
-      <el-link style="color:rgb(19, 125, 205)" class="text-ellipsis" :href="data[item.value]" target="_blank"
+      <!-- <el-link style="color:rgb(19, 125, 205)" class="text-ellipsis" :href="data[item.value]" target="_blank"
         v-if="item.type === 'link' && isURL(data[item.value])">
         {{ data[item.value] }}
       </el-link>
       <el-input v-else-if="item.type === 'link'" v-model.trim="data[item.value]" :style="{ width: item.width + 'px' }"
         :type="item.type" :title="data[item.value]" :disabled="item.disabled" :clearable="item.clearable || true"
         :placeholder="item.disabled ? '' : getPlaceholder(item)" @focus="handleEvent(item.event)"
-        @change="handleEventChange(item.event, data[item.value])" />
+        @change="handleEventChange(item.event, data[item.value])" /> -->
 
       <!-- 点击文字预览图片 -->
       <div style="color:rgb(19, 125, 205)"
@@ -228,7 +228,8 @@ export default {
     },
     // 相关字段
     fieldList: {
-      type: Array
+      type: Array,
+      default: ()=>[]
     },
     // 验证规则
     rules: {
@@ -312,8 +313,6 @@ export default {
   mounted () {
     // 将form实例返回到父级
     this.$emit('update:refObj', this.$refs.form)
-    console.log("debounce =", debounce)
-    console.log("dayjs =", dayjs)
   },
   methods: {
     isPicForUrls (url) {
@@ -344,6 +343,7 @@ export default {
     },
     // 获取字段列表
     getConfigList () {
+      // item无show属性时，默认显示
       return this.fieldList.filter(item => !Object.prototype.hasOwnProperty.call(item, 'show') || (Object.prototype.hasOwnProperty.call(item, 'show') && item.show))
     },
     // 得到placeholder的显示
