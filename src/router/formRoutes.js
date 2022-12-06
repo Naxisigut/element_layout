@@ -23,6 +23,15 @@ const formStyleRoutes = [
       title: "表单label垂直居中",
     },
   },
+  {
+    path: "custom_form_component_1",
+    name: "custom_form_component_1",
+    component: () => import("../views/form/custom_form_component_1.vue"),
+    meta: {
+      desc: " 表单样式",
+      title: "自定义组件测试",
+    },
+  },
 ];
 
 /* 表单校验相关路由表 */
