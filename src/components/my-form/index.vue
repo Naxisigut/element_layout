@@ -5,8 +5,7 @@
     :label-position="labelPosition">
     <el-form-item
       v-for="item in getConfigList()" :key="item.value"
-      v-show="!item.hidden"
-      :prop="item.value"
+      v-show="!item.hidden" :prop="item.value"
       :class="item.className" :style="item.style" :label-width="item.labelWidth"
       :label="item.label + (item.labelAttach ? item.labelAttach : labelAttach ? labelAttach : '')"
     >
@@ -21,34 +20,62 @@
         <slot :name="'form-item-' + item.value" />
       </template>
 
-      <!-- 普通输入框 -->
-      <el-input v-if="item.type === 'input' || item.type === 'password'" v-model.trim="data[item.value]"
-        :style="{ width: item.width + 'px' }" :type="item.type" :title="data[item.value]" :disabled="item.disabled"
-        :clearable="item.clearable || true" :placeholder="item.disabled ? '' : getPlaceholder(item)"
-        @focus="handleEvent(item.event)" @change="handleEventChange(item.event, data[item.value])" />
-      <!-- <el-link style="color:rgb(19, 125, 205)" class="text-ellipsis" :href="data[item.value]" target="_blank"
-        v-if="item.type === 'link' && isURL(data[item.value])">
-        {{ data[item.value] }}
-      </el-link>
-      <el-input v-else-if="item.type === 'link'" v-model.trim="data[item.value]" :style="{ width: item.width + 'px' }"
-        :type="item.type" :title="data[item.value]" :disabled="item.disabled" :clearable="item.clearable || true"
-        :placeholder="item.disabled ? '' : getPlaceholder(item)" @focus="handleEvent(item.event)"
-        @change="handleEventChange(item.event, data[item.value])" /> -->
+      <!-- 普通输入框 type input&password -->
+      <el-input
+        v-if="item.type === 'input' || item.type === 'password'"
+        v-model.trim="data[item.value]"
+        :style="{ width: item.width + 'px' }" 
+        :type="item.type" 
+        :title="data[item.value]" 
+        :disabled="item.disabled"
+        :clearable="item.clearable && true" 
+        :placeholder="item.disabled ? '' : getPlaceholder(item)"
+        @focus="handleEvent(item.event)" 
+        @change="handleEventChange(item.event, data[item.value])" 
+      />
 
-      <!-- 点击文字预览图片 -->
-      <div style="color:rgb(19, 125, 205)"
+      <!-- type link -->
+      <el-link 
+        v-if="item.type === 'link' && isURL(data[item.value])"
+        style="color:rgb(19, 125, 205)" 
+        class="text-ellipsis" 
+        target="_blank"
+        :href="data[item.value]" 
+      >
+       {{ data[item.value] }}
+      </el-link>
+      <el-input 
+        v-else-if="item.type === 'link'" 
+        v-model.trim="data[item.value]" 
+        :style="{ width: item.width + 'px' }"
+        :type="item.type" 
+        :title="data[item.value]" 
+        :disabled="item.disabled" 
+        :clearable="item.clearable || true"
+        :placeholder="item.disabled ? '' : getPlaceholder(item)" 
+        @focus="handleEvent(item.event)"
+        @change="handleEventChange(item.event, data[item.value])" />
+
+      <!-- 点击文字预览图片 type imgLink -->
+      <!-- 图片 -->
+      <div 
         v-if="item.type === 'imgLink' && /.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test(data[item.value])"
-        class="demo-image__preview" @click="htmlImage(data[item.value])">
-        查看图片
-        <el-image id="elImagess" style="width: 100px; height: 100px;display: none;"
-          :src="data[item.value].split(',')[0]" :preview-src-list="data[item.value].split(',')">
+        style="color:rgb(19, 125, 205)"
+        class="demo-image__preview" @click="htmlImage(data[item.value])"
+      > 查看图片
+        <el-image 
+          id="elImagess" 
+          style="width: 100px; height: 100px;display: none;"
+          :src="data[item.value].split(',')[0]" 
+          :preview-src-list="data[item.value].split(',')">
         </el-image>
       </div>
-
-      <div  style="color:rgb(19, 125, 205)"
+      <!-- 视频 -->
+      <div 
         v-if="item.type === 'imgLink' && /.(mp4|avi|rmvb|mpeg|m4v|mov|flv|rm|wmv)$/.test(data[item.value])"
+        style="color:rgb(19, 125, 205)"
         class="demo-image__preview">
-        <span @click="btnViedo(data[item.value])">
+        <span @click="btnVideo(data[item.value])">
           播放视频
         </span>
         <el-dialog title="查看视频" :visible.sync="centerDialogVisible" width="30%" center>
@@ -62,16 +89,29 @@
         </el-dialog>
       </div>
 
-      <!-- 文本输入框 -->
-      <el-input v-if="item.type === 'textarea'" v-model.trim="data[item.value]" :type="item.type"
-        :clearable="item.clearable || true" :style="{ width: item.width + 'px' }" :disabled="item.disabled"
-        :title="data[item.value]" :placeholder="getPlaceholder(item)"
-        :autosize="item.autosize || { minRows: 2, maxRows: 10 }" @focus="handleEvent(item.event)" />
+      <!-- 文本输入框 type textarea -->
+      <el-input 
+        v-if="item.type === 'textarea'" 
+        v-model.trim="data[item.value]" 
+        :type="item.type"
+        :clearable="item.clearable || true" 
+        :style="{ width: item.width + 'px' }" 
+        :disabled="item.disabled"
+        :title="data[item.value]" 
+        :placeholder="getPlaceholder(item)"
+        :autosize="item.autosize || { minRows: 2, maxRows: 10 }" 
+        @focus="handleEvent(item.event)" 
+      />
 
-      <!-- 单选框 -->
-      <el-radio-group v-if="item.type === 'radio'" v-loading="item.loading" element-loading-text="加载中"
-        element-loading-spinner="el-icon-loading" v-model="data[item.value]"
-        @change="handleEvent(item.event, data[item.value])">
+      <!-- 单选框 type radio -->
+      <el-radio-group
+        v-if="item.type === 'radio'" 
+        v-loading="item.loading" 
+        element-loading-text="加载中"
+        element-loading-spinner="el-icon-loading" 
+        v-model="data[item.value]"
+        @change="handleEvent(item.event, data[item.value])"
+      >
         <el-radio-button v-for="childItem in listTypeInfo[item.list]" :label="childItem.value" :key="childItem.value">
           {{ childItem.label }}
           <template v-if="Object.prototype.hasOwnProperty.call(childItem, 'number')">
@@ -80,7 +120,7 @@
         </el-radio-button>
       </el-radio-group>
 
-      <!-- 计数器 -->
+      <!-- 计数器 type inputNumber -->
       <el-input-number
         v-if="item.type === 'inputNumber'"
         v-model="data[item.value]"
@@ -94,25 +134,40 @@
       <!-- <my-input-number v-if="item.type === 'inputNumber'" :data="data" :item="item" @change="handleEvent(item.event)">
       </my-input-number> -->
 
-      <!-- 选择框 -->
-      <el-select v-if="item.type === 'select'" v-model="data[item.value]" :style="{ width: item.width + 'px' }"
-        :disabled="item.disabled" :clearable="item.clearable || true" :filterable="item.filterable || true"
-        :placeholder="getPlaceholder(item)" @change="handleEvent(item.event, data[item.value])">
+      <!-- 选择框 type select -->
+      <el-select 
+        v-if="item.type === 'select'" 
+        v-model="data[item.value]" 
+        :style="{ width: item.width + 'px' }"
+        :disabled="item.disabled" 
+        :clearable="item.clearable || true" 
+        :filterable="item.filterable || true"
+        :placeholder="getPlaceholder(item)" 
+        @change="handleEvent(item.event, data[item.value])"
+      >
         <el-option v-for="childItem in listTypeInfo[item.list]" :key="childItem.value" :label="childItem.label"
           :value="childItem.value" />
       </el-select>
 
-      <!-- 可远程搜索选择框 -->
-      <el-select v-if="item.type === 'remoteSelect'" v-model="data[item.value]" :style="{ width: item.width + 'px' }"
-        :disabled="item.disabled" :clearable="item.clearable || true" :multiple="item.multiple" allow-create filterable
-        remote :remote-method="(query) => remoteMethod(item.event, query, item, this)" :loading="item.loading"
+      <!-- 可远程搜索选择框 type remoteSelect -->
+      <el-select 
+        v-if="item.type === 'remoteSelect'" 
+        v-model="data[item.value]" 
+        allow-create filterable remote 
+        :style="{ width: item.width + 'px' }"
+        :disabled="item.disabled" 
+        :clearable="item.clearable || true" 
+        :multiple="item.multiple" 
+        :remote-method="(query) => remoteMethod(item.event, query, item, this)" 
+        :loading="item.loading"
         :placeholder="getPlaceholder(item)"
-        @change="handleRemoteSelectEvent(item.value, data[item.value], item.dataObj)">
+        @change="handleRemoteSelectEvent(item.value, data[item.value], item.dataObj)"
+      >
         <el-option v-for="childItem in listTypeInfo[item.list]" :key="childItem.value" :label="childItem.label"
           :value="childItem.value" />
       </el-select>
 
-      <!-- 级联选择器 -->
+      <!-- 级联选择器 type cascader&tree -->
       <el-cascader
         v-if="item.type === 'cascader' || item.type === 'tree'"
         v-model="data[item.value]"
@@ -136,45 +191,64 @@
         :data="data" :item="item" :placeholder="getPlaceholder(item)" @handleEvent="handleEvent">
       </my-cascader> -->
 
-      <!-- 日期选择框 -->
+      <!-- 日期选择框 type date&daterange&datetime&datetimerange -->
       <el-date-picker
         v-if="item.type === 'date' || item.type === 'daterange' || item.type === 'datetime' || item.type === 'datetimerange'"
-        v-model="data[item.value]" :style="{ width: isNaN(item.width) ? item.width : item.width + 'px' }"
-        :type="item.type" :format="item.type === 'datetime' ? 'yyyy 年 MM 月 dd 日 HH 时 mm 分 ss 秒' : 'yyyy 年 MM 月 dd 日'"
+        v-model="data[item.value]" 
+        :style="{ width: isNaN(item.width) ? item.width : item.width + 'px' }"
+        :type="item.type" 
+        :disabled="item.disabled"
+        :clearable="item.clearable || true" 
+        :format="item.type === 'datetime' ? 'yyyy 年 MM 月 dd 日 HH 时 mm 分 ss 秒' : 'yyyy 年 MM 月 dd 日'"
         :value-format="item.type === 'datetime' ? 'yyyy-MM-dd HH:mm:ss' : 'yyyy-MM-dd'"
         :picker-options="item.type === 'datetimerange' ? item.timePickerOptions || timePickerOptions : null"
-        :clearable="item.clearable || true" :disabled="item.disabled"
-        :start-placeholder="item.startPlaceholder || '开始日期'" :end-placeholder="item.endPlaceholder || '结束日期'"
-        :placeholder="getPlaceholder(item)" @focus="handleEvent(item.event)"
-        @change="handleEvent(item.event, data[item.value])" />
-      <!-- 年 -->
-      <el-date-picker v-if="item.type === 'year'" v-model="data[item.value]" type="year"
-        :clearable="item.clearable || true" value-format="yyyy" format="yyyy" placeholder="选择年">
-      </el-date-picker>
+        :start-placeholder="item.startPlaceholder || '开始日期'" 
+        :end-placeholder="item.endPlaceholder || '结束日期'"
+        :placeholder="getPlaceholder(item)" 
+        @focus="handleEvent(item.event)"
+        @change="handleEvent(item.event, data[item.value])" 
+      />
 
-      <!-- 文件上传
+      <!-- 年日期选择框 type year -->
+      <el-date-picker 
+        v-if="item.type === 'year'" 
+        v-model="data[item.value]" 
+        type="year"
+        value-format="yyyy" 
+        format="yyyy" 
+        placeholder="选择年" 
+        :clearable="item.clearable || true" 
+      />
+
+      <!-- 文件上传 type file
         :file-list="fileList(item.default)"
         :list-type="item.disabled || disabled ? 'text' : 'picture'"
       -->
-      <el-upload v-if="item.type === 'file'" :class="{ 'showFile': item.disabled || disabled }" :multiple="true"
-        :auto-upload="false" action="#"
+      <el-upload 
+        v-if="item.type === 'file'"
+        action="#"
+        :class="{ 'showFile': item.disabled || disabled }" 
+        :multiple="true"
+        :auto-upload="false" 
         :on-change="(file, fileList) => handleFileChange(file, fileList, item.value, item.notAutoUpload)"
         :on-remove="(file, fileList) => handleFileListRemove(file, fileList, item.value)"
-        :on-preview="handleFileListPreview" :file-list="item.disabled || disabled ? [] : fileList(item.default)">
+        :on-preview="handleFileListPreview" 
+        :file-list="(item.disabled || disabled) ? [] : getDefaultFiles(item.default)"
+      >
         <el-button size="small" type="primary">点击上传</el-button>
         <el-popover placement="top" width="400" trigger="click" @hide="fileSrcVal = ''">
           <div>
             <el-input v-model="fileSrcVal" type="textarea" :rows="4" placeholder="请输入文件资源链接，http://"></el-input>
-            <div style="display:flex;justify-content: end;margin-top:10px;">
+            <div style="display: flex; justify-content: end;margin-top: 10px;">
               <el-button type="primary" @click="addFile(item)">提交</el-button>
             </div>
           </div>
           <el-button v-if="!item.noHttpUpload" slot="reference" size="small" style="margin-left:10px" type="text"
             @click.stop="">资源链接</el-button>
         </el-popover>
-        <!-- 查看 -->
-        <div v-if="item.disabled || disabled" class="el-upload__tip" slot="tip">
-          <div v-for="(item1, index1) in fileList(item.default)" :key="index1">
+        <!-- 仅在被禁用时出现，展示默认列表 -->
+        <div slot="tip" v-if="item.disabled || disabled" class="el-upload__tip">
+          <div v-for="(item1, index1) in getDefaultFiles(item.default)" :key="index1">
             <div v-if="item1.type === 'image'">
               <el-image style="width: 100px; height: 100px" :src="item1.url" :preview-src-list="[item1.url]">
               </el-image>
@@ -221,7 +295,7 @@ export default {
     data: {
       type: Object
     },
-    // 表单尺寸
+    // 全局表单项尺寸
     size: {
       type: String,
       default: 'small'
@@ -239,17 +313,17 @@ export default {
     listTypeInfo: {
       type: Object
     },
-    // label宽度
+    // 全局label宽度
     labelWidth: {
       type: String,
       default: '120px'
     },
-    //
+    // 全局label位置
     labelPosition: {
       type: String,
       default: ''
     },
-    // label附加字符
+    // 全局label附加字符
     labelAttach: {
       type: String,
       default: ':'
@@ -329,7 +403,7 @@ export default {
         }
       }
     },
-    btnViedo (val) {
+    btnVideo (val) {
       if (isVideoForUrl(val)) {
         // console.log(a)
         this.centerDialogVisible = true
@@ -361,15 +435,15 @@ export default {
       return placeholder
     },
     // 绑定的相关事件
-    handleEvent (evnet, data) {
+    handleEvent (event, data) {
       // 是否选中全选
-      if (evnet.hasSelectAll) {
-        this.data[evnet.paramKey] = data
-        this.$emit('handleEvent', evnet, data)
+      if (event.hasSelectAll) {
+        this.data[event.paramKey] = data
+        this.$emit('handleEvent', event, data)
       }
 
-      if (!evnet.hasSelectAll) {
-        this.$emit('handleEvent', evnet, data)
+      if (!event.hasSelectAll) {
+        this.$emit('handleEvent', event, data)
       }
     },
     // 绑定的相关事件 inputChange
@@ -383,23 +457,10 @@ export default {
     remoteMethod: debounce(function (event, query, item) {
       this.$emit('remoteMethod', event, query, item)
     }, 1000),
-    // 文件上传
-    handleFileChange (file, fileList, key, notAutoUpload) {
-      var form = new FormData()
-      fileList.forEach(item => {
-        form.append('file', item.raw)
-      })
-      // lcc tempDisable
-      // if (notAutoUpload) {
-      //   this.$emit('uploadFile', key, file.raw, 'add', fileList)
-      // } else {
-      //   uploadMulti(form).then(res => {
-      //     this.$emit('uploadFile', key, res, 'add')
-      //   })
-      // }
-    },
-    // 文件
-    fileList (urlStr) {
+
+    /* 文件上传组件 */
+    // 获取默认文件列表，不传则设为空数组
+    getDefaultFiles(urlStr) {
       const fileList = []
       if (urlStr && !Array.isArray(urlStr)) {
         const _urlStr = urlStr.split(',')
@@ -407,17 +468,35 @@ export default {
           fileList.push({
             name: item.split('/').slice(-1)[0],
             url: item,
-            // lcc tempDisable
-            // type: isExternal(item) ? isPicForUrl(item) ? 'image' : isVideoForUrl(item) ? 'video' : 'file' : ''
+            type: isExternal(item) ? isPicForUrl(item) ? 'image' : isVideoForUrl(item) ? 'video' : 'file' : ''
           })
         })
       } else {
+        // 当urlStr为undefined(给el-upload的fileList传空值)时，el-upload的fileList默认为[]?
+        // console.log("urlStr =", urlStr)
         return urlStr
       }
+      // console.log("fileList =", fileList)
       return fileList
     },
-    handleFileListRemove (file, fileList, key) {
-      console.log(file, fileList, key)
+    // 文件上传
+    handleFileChange(file, fileList, key, notAutoUpload) {
+      var form = new FormData()
+      console.log("handleFileChange fileList =", fileList)
+      fileList.forEach(item => {
+        form.append('file', item.raw)
+      })
+      if (notAutoUpload) {
+        this.$emit('uploadFile', key, file.raw, 'add', fileList)
+      } else {
+        uploadMulti(form).then(res => {
+          this.$emit('uploadFile', key, res, 'add')
+        })
+      }
+    },
+    handleFileListRemove(file, fileList, key) {
+      // 移除文件不会触发on-change
+      console.log('handleFileListRemove', file, fileList, key)
       let urlarr = []
       if (fileList.length) {
         urlarr = fileList.map(item => item.url)
@@ -426,7 +505,8 @@ export default {
       this.$emit('uploadFile', key, urls, 'remove')
     },
     handleFileListPreview (file) {
-      this.$downloadFiles(file.url)
+      console.log("file in fileList =", file)
+      // this.$downloadFiles(file.url) lcc
     },
     // 新窗口打开链接
     openLinkHandle (url) {
