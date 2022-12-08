@@ -78,6 +78,7 @@ export default {
                 notAutoUpload: true, // 是否自动上传
                 disabled: false, // 是否禁用 禁用后整个表单项隐藏
                 default: undefined, // 默认文件列表，不可传''和null
+                // 事件：uploadFile
             },
             /* slot */
             {
@@ -105,10 +106,9 @@ export default {
         this.$refs.formPage.$refs.form.validate()
     },
     uploadValidator(rule, value, cb){
-        console.log("rule =", rule)
-        console.log("value =", value)
-        console.log("cb =", cb)
-        // if()
+        // 上传组件暂时无法校验
+        // 若要校验，至少需要拿到el-upload的fileList，会非常麻烦
+        cb()
     }
   },
 }

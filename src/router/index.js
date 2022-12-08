@@ -4,6 +4,7 @@ Vue.use(VueRouter)
 
 import formRoutes from "./formRoutes";
 import tableRoutes from "./tableRoutes";
+import uploaderRoutes from "./uploaderRoutes";
 
 const routes = [
     {
@@ -15,7 +16,8 @@ const routes = [
       component: ()=>import('../views/indexView.vue')
     },
     formRoutes,
-    tableRoutes
+    tableRoutes,
+    uploaderRoutes
 ]
 
 const router = new VueRouter({

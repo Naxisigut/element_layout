@@ -29,7 +29,7 @@ const tableStyleRoutes = [
   }
 ]
 
-/* 最终form相关路由表 */
+/* 最终table相关路由表 */
 const tableRoutes = {
   path: "/table",
   name: "Table",
