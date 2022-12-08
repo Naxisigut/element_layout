@@ -32,10 +32,19 @@ const uploaderUseRoutes = [
     name: "uploader_use_1",
     component: () => import("../views/uploader/uploader_use_1.vue"),
     meta: {
-      desc: " 上传组件使用",
+      desc: "上传组件使用",
       title: "上传文件的生命周期",
     },
-  }
+  },
+  {
+    path: "uploader_use_2",
+    name: "uploader_use_2",
+    component: () => import("../views/uploader/uploader_use_2.vue"),
+    meta: {
+      desc: "上传组件使用",
+      title: "上传组件限制文件大小",
+    },
+  },
 ];
 
 /* 最终uploader相关路由表 */
