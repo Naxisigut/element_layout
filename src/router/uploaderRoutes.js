@@ -42,7 +42,25 @@ const uploaderUseRoutes = [
     component: () => import("../views/uploader/uploader_use_2.vue"),
     meta: {
       desc: "上传组件使用",
-      title: "上传组件限制文件大小",
+      title: "限制文件大小",
+    },
+  },
+  {
+    path: "uploader_use_3",
+    name: "uploader_use_3",
+    component: () => import("../views/uploader/uploader_use_3.vue"),
+    meta: {
+      desc: "上传组件使用",
+      title: "限制文件数量",
+    },
+  },
+  {
+    path: "uploader_use_4",
+    name: "uploader_use_4",
+    component: () => import("../views/uploader/uploader_use_4.vue"),
+    meta: {
+      desc: "上传组件使用",
+      title: "限制文件数量-列表可更新",
     },
   },
 ];
