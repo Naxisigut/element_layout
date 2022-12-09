@@ -9,6 +9,9 @@
     </div>
     <div>但是，el-upload的所有钩子，比如on-change，所传递的fileList是真实的fileList</div>
     <div>el-upload会对file-list中的file进行一层封装，file.raw才是原本的js file对象</div>
+    <div>--------------------------------</div>
+    <div>点击el-upload中的所有内容，默认都会打开文件选择框</div>
+
 
   </div>
 </template>

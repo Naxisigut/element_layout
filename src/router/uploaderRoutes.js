@@ -63,6 +63,15 @@ const uploaderUseRoutes = [
       title: "限制文件数量-列表可更新",
     },
   },
+  {
+    path: "uploader_use_5",
+    name: "uploader_use_5",
+    component: () => import("../views/uploader/uploader_use_5.vue"),
+    meta: {
+      desc: "上传组件使用",
+      title: "fileList详细说明",
+    },
+  },
 ];
 
 /* 最终uploader相关路由表 */
