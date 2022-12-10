@@ -5,6 +5,7 @@ Vue.use(VueRouter)
 import formRoutes from "./formRoutes";
 import tableRoutes from "./tableRoutes";
 import uploaderRoutes from "./uploaderRoutes";
+import dialogRoutes from "./dialogRoutes";
 
 const routes = [
     {
@@ -23,6 +24,7 @@ const routes = [
     formRoutes,
     tableRoutes,
     uploaderRoutes,
+    dialogRoutes
 ]
 
 const router = new VueRouter({
