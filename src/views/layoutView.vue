@@ -7,7 +7,12 @@
 
 <script>
 export default {
-
+  name: 'layoutView'
+  // watch:{
+  //   $route(){
+  //     console.log("layoutView")
+  //   }
+  // }
 }
 </script>
 

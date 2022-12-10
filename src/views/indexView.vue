@@ -38,6 +38,10 @@ export default {
   },
   methods:{
     inner(outerName){
+      if(outerName == 'test'){
+        this.go(outerName)
+        return
+      }
       this.$refs.secondPage.classList.remove('hide')
       this.$refs.secondPage.classList.add('front')
       this.$refs.firstPage.classList.remove('front')

@@ -30,8 +30,8 @@
         <li>file-list是非必要的props，它可以不设置。</li>
         <li>在初始化时，file-list会被赋给fileList，即默认的文件列表</li>
         <li>在组件中添加/移除/上传等操作会影响fileList，但不会影响file-list</li>
-        <li>file-list每次变化时，会重新赋值给fileList</li>
-        <li>所以总结：file-list只在初始化和变化时才会赋值给fileList，而fileList的变化不会影响file-list。两者关系是单向的。</li>
+        <li>file-list每次变化时，会重新赋值给fileList <br /></li>
+        <li>总结：file-list只在初始化和变化时才会赋值给fileList，而fileList的变化不会影响file-list。两者关系是单向的。</li>
       </ul>
     </div>
   </div>

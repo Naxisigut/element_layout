@@ -15,9 +15,14 @@ const routes = [
       path: '/index',
       component: ()=>import('../views/indexView.vue')
     },
+    {
+      path: '/test',
+      name: 'test',
+      component: ()=>import('@/components/testCpnt.vue')
+    },
     formRoutes,
     tableRoutes,
-    uploaderRoutes
+    uploaderRoutes,
 ]
 
 const router = new VueRouter({
