@@ -2,7 +2,6 @@
   <div class="page-container">
     <div class="container">
         <el-button @click="show" >显示dialog</el-button>
-        <el-dialog :visible.sync="visible"></el-dialog>
     </div>
     <div class="h100"></div>
     <div class="container desc">
@@ -16,18 +15,21 @@
 </template>
 
 <script>
+import Modal from "./modal";
+import dialogTestContent from "./dialogTestContent.vue";
 export default {
   data(){
     return {
-        visible: false
+      dialogConfig:{
+        title: 'JSX渲染模态框',
+        modal: false
+      }
     }
   },
   methods:{
     show(){
-        this.visible = true
-    },
-  },
-  mounted(){
+      Modal(dialogTestContent, this.dialogConfig)
+    }
   }
 }
 </script>

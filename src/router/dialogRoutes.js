@@ -7,6 +7,15 @@ const dialogUseRoutes = [
     component: ()=>import('@/views/dialog/dialog_use_1.vue'),
     meta: {
       desc: '对话框功能',
+      title: '基本使用'
+    }
+  },
+  {
+    path: 'dialog_use_2',
+    name: 'dialog_use_2',
+    component: ()=>import('@/views/dialog/dialog_use_2.vue'),
+    meta: {
+      desc: '对话框功能',
       title: 'jsx渲染'
     }
   }
