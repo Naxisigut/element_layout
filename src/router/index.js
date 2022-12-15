@@ -33,7 +33,7 @@ const router = new VueRouter({
 
 // indexCata: 在indexView page1上展示的菜单
 export const getIndexCata = ()=>{
-  const filterList = ['/', '/index']
+  const filterList = ['/', '/index', '/test']
   return routes.filter((item) => !filterList.includes(item.path))
 }
 // innerCata: 在indexView page2展示的菜单

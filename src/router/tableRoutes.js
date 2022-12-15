@@ -29,6 +29,19 @@ const tableStyleRoutes = [
   }
 ]
 
+/* 表格样式相关路由表 */
+const tableBugRoutes = [
+    {
+    path: 'table_bug_1',
+    name: 'table_bug_1',
+    component: ()=>import('@/views/table/table_bug_1.vue'),
+    meta: {
+      desc: '表格异常',
+      title: 'flex:1中的el-table只伸不缩'
+    }
+  }
+]
+
 /* 最终table相关路由表 */
 const tableRoutes = {
   path: "/table",
@@ -46,7 +59,8 @@ const tableRoutes = {
     },
     ...tableHeaderRoutes,
     ...tableFuncRoutes,
-    ...tableStyleRoutes
+    ...tableStyleRoutes,
+    ...tableBugRoutes
   ],
 };
 
