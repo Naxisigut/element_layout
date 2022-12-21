@@ -19,7 +19,7 @@ export let baseTableData = [
 
 export const baseColConfig = {
     align: 'center',
-    width: '100'
+    // width: '100'
 }
 
 export const baseTableConfig = {

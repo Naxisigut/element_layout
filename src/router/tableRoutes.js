@@ -14,6 +14,15 @@ const tableHeaderRoutes = [
 
 /* 表格功能相关路由表 */
 const tableFuncRoutes = [
+  {
+    path: 'table_func_1',
+    name: 'table_func_1',
+    component: ()=>import('@/views/table/table_func_1.vue'),
+    meta: {
+      desc: '表格功能',
+      title: '树形数据基本使用'
+    }
+  }
 ];
 
 /* 表格样式相关路由表 */
